@@ -27,6 +27,10 @@ export default function SignIn() {
             required
           />
         </div>
+        <button>Sign In</button>
+        <div className="sign-up-link">
+          Don't have an account? <a href="#">Sign Up</a>
+        </div>
       </form>
     </div>
   );
