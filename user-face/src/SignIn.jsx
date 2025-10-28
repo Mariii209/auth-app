@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./SignIn.css";
 
 export default function SignIn() {
@@ -29,7 +30,7 @@ export default function SignIn() {
         </div>
         <button>Sign In</button>
         <div className="sign-up-link">
-          Don't have an account? <a href="#">Sign Up</a>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
       </form>
     </div>
