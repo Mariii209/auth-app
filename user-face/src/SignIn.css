@@ -1,0 +1,62 @@
+.sign-in-form {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%), #fff;
+}
+.sign-in-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  width: 100%;
+  padding: 5%;
+  margin: 5%;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+.sign-in-form h3 {
+  color: #0a0a0a;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 100% */
+  letter-spacing: -0.312px;
+}
+
+.sign-in-form .sign-in-message {
+  color: #717182;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.312px;
+}
+
+.sign-in-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sign-in-form .form-group label {
+  color: #0a0a0a;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 100% */
+  letter-spacing: -0.15px;
+}
+
+.sign-in-form .form-group input {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+}
