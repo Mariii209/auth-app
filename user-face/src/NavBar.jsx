@@ -5,11 +5,13 @@ import "./Navbar.css";
 export default function NavBar() {
   return (
     <nav className="navbar">
-      <h2>
-        <i class="fa-solid fa-heart"></i> LoveConnect
-      </h2>
+      <Link to="/" className="navbar-logo">
+        <h2>
+          <i class="fa-solid fa-heart"></i> LoveConnect
+        </h2>
+      </Link>
       <div>
-        <Link to="/">Sign In</Link>
+        <Link to="/signin">Sign In</Link>
         <Link to="/signup">Sign Up</Link>
       </div>
     </nav>

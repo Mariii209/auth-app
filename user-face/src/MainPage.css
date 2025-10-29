@@ -1,0 +1,137 @@
+.main-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  padding: 5% 3%;
+  gap: 10px;
+  min-height: 100vh;
+}
+
+.main-page .main-text {
+  max-width: 450px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.main-page .main-text .badge {
+  color: #c6005c;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16777200px;
+  background: #fce7f3;
+  padding: 8px 16px;
+}
+
+.main-page .main-text h5 {
+  color: #0a0a0a;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.312px;
+}
+
+.main-page .main-text p {
+  color: #4a5565;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.312px;
+}
+
+.main-page .main-text .action-links {
+  display: flex;
+  gap: 20px;
+}
+
+.main-page .main-text .action-links a {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #c6005c;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.main-page .main-text .action-links .get-started {
+  border-radius: 8px;
+  background: linear-gradient(90deg, #f6339a 0%, #9810fa 100%);
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.15px;
+}
+
+.main-page .main-text .action-links .log-in {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  color: #0a0a0a;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.15px;
+}
+
+.main-page .image-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 equal columns */
+  grid-template-rows: 1fr 1fr; /* 2 rows */
+  gap: 10px;
+  grid-template-areas:
+    "a b"
+    "a c";
+  position: relative;
+}
+
+.first {
+  grid-area: a; /* Left column spanning both rows */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: relative;
+  top: 40px;
+  left: 20px;
+}
+
+.second {
+  grid-area: b; /* Top-right */
+  width: 100%;
+  height: autos;
+  object-fit: cover;
+}
+
+.third {
+  grid-area: c; /* Bottom-right */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .main-page {
+    flex-direction: column;
+    padding: 10% 5%;
+    gap: 60px;
+  }
+
+  .main-page .main-text .action-links {
+    flex-direction: column;
+    text-align: center;
+  }
+}
