@@ -4,6 +4,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import MainPage from "./MainPage";
 import NavBar from "./NavBar";
+import HomePage from "./HomePage";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/home" element={<HomePage />} />
         </Routes>
       </div>
     </BrowserRouter>

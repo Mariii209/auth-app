@@ -1,0 +1,89 @@
+.home-page {
+  background-color: #f0f0f0;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-page .profile-card {
+  background-color: red;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5%;
+}
+
+.home-page .profile-card .profile-info h3,
+.home-page .profile-card .profile-info h4,
+.home-page .profile-card .profile-info p {
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.15px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.location-distance {
+  display: flex;
+  gap: 15px;
+}
+
+.home-page .profile-card .profile-info .interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.home-page .profile-card .profile-info .interests p {
+  color: #030213;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  line-height: 16px;
+  padding: 4px 8px;
+}
+
+.actions {
+  height: 130px;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions .button-group {
+  display: flex;
+  gap: 25px;
+}
+
+.actions .button-group button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  font-size: 22px;
+}
+
+.like-button {
+  background: linear-gradient(90deg, #f6339a 0%, #fb2c36 100%);
+  color: white;
+}
