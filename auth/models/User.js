@@ -30,6 +30,7 @@ userSchema.post("save", function (doc, next) {
   next();
 });
 
+//create a model
 const User = mongoose.model("user", userSchema);
 
 export default User;
