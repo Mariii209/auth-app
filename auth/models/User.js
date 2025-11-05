@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcryptjs";
 const { isEmail } = validator;
 
 // User Schema
@@ -19,8 +20,9 @@ const userSchema = new mongoose.Schema({
 });
 
 //fire a function before doc is saved to db
-userSchema.pre("save", function (next) {
-  console.log("User about to be created & saved", this);
+userSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSaltSync();
+  this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
