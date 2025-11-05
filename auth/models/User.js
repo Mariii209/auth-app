@@ -29,6 +29,17 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please enter a password"],
     minlength: [6, "Password must be at least 6 characters long"],
   },
+
+  confirmPassword: {
+    type: String,
+    required: [true, "Please confirm your password"],
+    validate: {
+      validator: function (value) {
+        return value === this.password;
+      },
+      message: "Passwords do not match",
+    },
+  },
 });
 
 //Capitalize full name before saving to db
@@ -44,6 +55,7 @@ userSchema.pre("save", function (next) {
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSaltSync();
   this.password = await bcrypt.hash(this.password, salt);
+  this.confirmPassword = undefined;
   next();
 });
 
