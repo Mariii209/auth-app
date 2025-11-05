@@ -1,42 +1,35 @@
-require("dotenv").config({ debug: true });
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import authRoutes from "./routes/authRoutes.js";
 
-const express = require("express");
+dotenv.config();
+
 const app = express();
-const mongoose = require("mongoose");
-const cors = require("cors");
-const path = require("path");
-const authRoutes = require("./routes/authRoutes");
+const PORT = process.env.PORT || 8000;
 
-const PORT = process.env.PORT;
+// 🧩 Fix for __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // CORS configuration
 const corsOptions = {
-  origin: "http://localhost:5173", // Replace with your frontend URL
+  origin: "http://localhost:5173", // frontend URL
   optionsSuccessStatus: 200,
 };
 
-// Enable CORS for all routes
 app.use(cors(corsOptions));
-
-// middleware
 app.use(express.json());
 
-// Serve static files from the "user-face" directory
+// serve static files
+app.use(express.static(path.join(__dirname, "user-face")));
 
-// database connection
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
-
-app.use(express.json());
-
-app.get("*", (req, res) => {});
-
-app.post("/api/auth/login", (req, res) => {});
+// routes
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../user-face/dist/index.html"));
+});
 
 app.use(authRoutes);
 
