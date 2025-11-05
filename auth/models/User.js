@@ -5,6 +5,18 @@ const { isEmail } = validator;
 
 // User Schema
 const userSchema = new mongoose.Schema({
+  fullName: {
+    type: String,
+    required: [true, "Please enter your full name"],
+    minlength: [2, "Full name must be at least 2 characters long"],
+    trim: true,
+    validate: {
+      validator: function (value) {
+        return value.split(" ").length >= 2; // must have at least first & last name
+      },
+      message: "Please enter your full first and last name",
+    },
+  },
   email: {
     type: String,
     required: [true, "Please enter an email"],
@@ -19,7 +31,16 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-//fire a function before doc is saved to db
+//Capitalize full name before saving to db
+userSchema.pre("save", function (next) {
+  this.fullName = this.fullName
+    .split(" ")
+    .map((name) => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase())
+    .join(" ");
+  next();
+});
+
+//Hash password before saving to db
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSaltSync();
   this.password = await bcrypt.hash(this.password, salt);

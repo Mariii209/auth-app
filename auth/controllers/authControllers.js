@@ -3,7 +3,7 @@ import User from "../models/User.js";
 //handle errors
 const handleErrors = (err) => {
   console.log(err.message, err.code);
-  let errors = { email: "", password: "" };
+  let errors = { fullName: "", email: "", password: "" };
 
   //duplicate error code
   if (err.code === 11000) {
@@ -30,10 +30,10 @@ export const login_post = (req, res) => {
 
 // Signup controller
 export const signup_post = async (req, res) => {
-  const { email, password } = req.body;
+  const { fullName, email, password } = req.body;
 
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ fullName, email, password });
     res.status(201).json(user);
   } catch (err) {
     const errors = handleErrors(err);
