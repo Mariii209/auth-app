@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -23,6 +24,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// MongoDB connection
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() =>
+    app.listen(PORT || 8000, () => {
+      console.log(`Server is running on port ${PORT}`);
+    })
+  )
+  .catch((err) => console.error("MongoDB connection error:", err));
+
 // serve static files
 app.use(express.static(path.join(__dirname, "user-face")));
 
@@ -32,7 +43,3 @@ app.get("/", (req, res) => {
 });
 
 app.use(authRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
