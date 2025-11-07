@@ -7,7 +7,7 @@ export default function NavBar() {
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
         <h2>
-          <i class="fa-solid fa-heart"></i> LoveConnect
+          <i className="fa-solid fa-heart"></i> LoveConnect
         </h2>
       </Link>
       <div>

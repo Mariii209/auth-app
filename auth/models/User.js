@@ -53,7 +53,10 @@ userSchema.pre("save", function (next) {
 
 //Hash password before saving to db
 userSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSaltSync();
+  // only run if password was modified or new
+  if (!this.isModified("password")) return next();
+
+  const salt = await bcrypt.genSaltSync(10);
   this.password = await bcrypt.hash(this.password, salt);
   this.confirmPassword = undefined;
   next();
