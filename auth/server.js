@@ -5,6 +5,9 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
+import cookieParser from "cookie-parser";
+
+// Initialize environment variables
 
 dotenv.config();
 
@@ -23,6 +26,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 // MongoDB connection
 mongoose
@@ -37,9 +41,27 @@ mongoose
 // serve static files
 app.use(express.static(path.join(__dirname, "user-face")));
 
-// routes
+// serve index.html for root route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../user-face/dist/index.html"));
 });
 
+// auth routes
 app.use(authRoutes);
+
+//cookie parser
+app.get("/set-cookie", (req, res) => {
+  res.cookie("newUser", false);
+  res.cookie("isLoggedIn", true, {
+    maxAge: 1000 * 60 * 60 * 24,
+    httpOnly: true,
+  });
+  res.send("Cookie has been set");
+});
+
+app.get("/read-cookie", (req, res) => {
+  const cookies = req.cookies;
+  console.log(cookies);
+
+  res.json(cookies);
+});
