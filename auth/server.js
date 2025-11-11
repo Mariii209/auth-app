@@ -22,6 +22,7 @@ const __dirname = path.dirname(__filename);
 const corsOptions = {
   origin: "http://localhost:5173", // frontend URL
   optionsSuccessStatus: 200,
+  credentials: true, // allow cookies
 };
 
 app.use(cors(corsOptions));
@@ -48,20 +49,3 @@ app.get("/", (req, res) => {
 
 // auth routes
 app.use(authRoutes);
-
-//cookie parser
-app.get("/set-cookie", (req, res) => {
-  res.cookie("newUser", false);
-  res.cookie("isLoggedIn", true, {
-    maxAge: 1000 * 60 * 60 * 24,
-    httpOnly: true,
-  });
-  res.send("Cookie has been set");
-});
-
-app.get("/read-cookie", (req, res) => {
-  const cookies = req.cookies;
-  console.log(cookies);
-
-  res.json(cookies);
-});
