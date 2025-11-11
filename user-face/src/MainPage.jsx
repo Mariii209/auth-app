@@ -7,7 +7,7 @@ export default function MainPage() {
     <div className="main-page">
       <div className="main-text">
         <div className="badge">
-          <i class="fa-solid fa-certificate"></i>
+          <i className="fa-solid fa-certificate"></i>
           Join our growing community of happy users.
         </div>
         <h5>Find Your Perfect Match Today!</h5>
