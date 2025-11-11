@@ -1,4 +1,6 @@
+import { json } from "express";
 import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 //handle errors
 const handleErrors = (err) => {
@@ -27,6 +29,13 @@ const handleErrors = (err) => {
   return errors;
 };
 
+//create json web token
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: `${process.env.JWT_EXPIRES_IN}s`,
+  });
+};
+
 // Login controller
 export const login_post = (req, res) => {
   const { email, password } = req.body;
@@ -45,7 +54,14 @@ export const signup_post = async (req, res) => {
       password,
       confirmPassword,
     });
-    res.status(201).json(user);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: process.env.JWT_EXPIRES_IN * 1000,
+    });
+    res
+      .status(201)
+      .json({ user: user._id, message: "User created successfully" });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
