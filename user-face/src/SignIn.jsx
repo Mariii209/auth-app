@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignIn.css";
 
 export default function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful sign-in (e.g., redirect, show message)
+      } else {
+        setError(data.message || "Sign-in failed. Please try again.");
+      }
+    } catch (err) {
+      setError("Sign-in failed. Please try again.");
+    }
+  };
+
   return (
     <div className="sign-in-form">
       <form>

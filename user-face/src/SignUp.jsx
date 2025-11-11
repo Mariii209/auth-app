@@ -25,6 +25,7 @@ export default function SignUp() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ fullName, email, password, confirmPassword }),
+        credentials: "include", // include cookies in the request
       });
 
       const data = await response.json();
