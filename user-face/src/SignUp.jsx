@@ -29,6 +29,7 @@ export default function SignUp() {
       });
 
       const data = await response.json();
+      console.log(data);
 
       if (response.ok) {
         setMessage(data.message);
@@ -50,6 +51,10 @@ export default function SignUp() {
           setError(data.message || "An error occurred. Please try again.");
         }
         setMessage("");
+      }
+
+      if (data.user) {
+        location.assign("/");
       }
     } catch (error) {
       setError("Cannot connect to the server. Please try again later.");
