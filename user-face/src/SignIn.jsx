@@ -39,6 +39,9 @@ export default function SignIn() {
         }
         setMessage("");
       }
+      if (data.user) {
+        location.assign("/");
+      }
     } catch (err) {
       setError("Cannot connect to the server. Please try again later.");
       setMessage("");
