@@ -37,10 +37,21 @@ const createToken = (id) => {
 };
 
 // Login controller
-export const login_post = (req, res) => {
+export const login_post = async (req, res) => {
   const { email, password } = req.body;
-  console.log(`email: ${email}, password: ${password}`);
-  res.send("hello from login");
+
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      maxAge: process.env.JWT_EXPIRES_IN * 1000,
+    });
+    res.status(200).json({ user: user._id, message: "Login successful" });
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
 };
 
 // Signup controller

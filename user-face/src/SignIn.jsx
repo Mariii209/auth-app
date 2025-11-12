@@ -6,6 +6,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,23 +18,36 @@ export default function SignIn() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // include cookies in the request
       });
 
       const data = await response.json();
+      console.log(data);
 
       if (response.ok) {
-        // Handle successful sign-in (e.g., redirect, show message)
+        setMessage(data.message);
+        setError("");
+        // Clear form fields
+        setEmail("");
+        setPassword("");
       } else {
-        setError(data.message || "Sign-in failed. Please try again.");
+        if (data.errors) {
+          const firstError = data.errors.email || data.errors.password;
+          setError(firstError);
+        } else {
+          setError(data.message || "An error occurred. Please try again.");
+        }
+        setMessage("");
       }
     } catch (err) {
-      setError("Sign-in failed. Please try again.");
+      setError("Cannot connect to the server. Please try again later.");
+      setMessage("");
     }
   };
 
   return (
     <div className="sign-in-form">
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3> Welcome Back</h3>
         <div className="sign-in-message">
           Sign in to your account to continue
@@ -45,6 +59,8 @@ export default function SignIn() {
             id="email"
             placeholder="you@example.com"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -54,9 +70,15 @@ export default function SignIn() {
             id="password"
             placeholder="••••••••"
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button>Sign In</button>
+
+        {error && <div className="error-message">{error}</div>}
+        {message && <div className="success-message">{message}</div>}
+
         <div className="sign-up-link">
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
