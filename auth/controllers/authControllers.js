@@ -90,3 +90,7 @@ export const signup_post = async (req, res) => {
     res.status(400).json({ errors });
   }
 };
+
+export const home_get = (req, res) => {
+  res.json({ message: "Welcome to the home page!", userId: req.userId });
+};

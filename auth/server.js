@@ -49,4 +49,4 @@ app.get("/", (req, res) => {
 });
 
 // auth routes
-app.use(authRoutes);
+app.use("/api/auth", authRoutes);

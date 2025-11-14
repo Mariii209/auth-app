@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import "./SignIn.css";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -40,7 +43,7 @@ export default function SignIn() {
         setMessage("");
       }
       if (data.user) {
-        location.assign("/");
+        navigate("/home");
       }
     } catch (err) {
       setError("Cannot connect to the server. Please try again later.");

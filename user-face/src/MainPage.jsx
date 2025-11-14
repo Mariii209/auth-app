@@ -19,8 +19,8 @@ export default function MainPage() {
           <Link className="get-started" to="/signup">
             Get Started Free
           </Link>
-          <Link className="log-in" to="/signin">
-            Log In
+          <Link className="log-in" to="/login">
+            Login
           </Link>
         </div>
       </div>

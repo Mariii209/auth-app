@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,7 +56,7 @@ export default function SignUp() {
       }
 
       if (data.user) {
-        location.assign("/");
+        navigate("/home");
       }
     } catch (error) {
       setError("Cannot connect to the server. Please try again later.");
@@ -122,7 +124,7 @@ export default function SignUp() {
         {message && <div className="success-message">{message}</div>}
 
         <div className="sign-in-link">
-          Already have an account? <Link to="/SignIn">Sign In</Link>
+          Already have an account? <Link to="/login">Sign In</Link>
         </div>
       </form>
     </div>

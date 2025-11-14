@@ -11,7 +11,7 @@ export default function NavBar() {
         </h2>
       </Link>
       <div>
-        <Link to="/signin">Sign In</Link>
+        <Link to="/login">Sign In</Link>
         <Link to="/signup">Sign Up</Link>
       </div>
     </nav>
