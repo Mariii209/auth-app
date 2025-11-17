@@ -91,6 +91,31 @@ export const signup_post = async (req, res) => {
   }
 };
 
+// Home controller
 export const home_get = (req, res) => {
   res.json({ message: "Welcome to the home page!", userId: req.userId });
+};
+
+// Get current user controller
+export const me_get = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("-password -__v");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Logout controller
+export const logout_post = (req, res) => {
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+
+  res.status(200).json({ message: "Logout successful" });
 };
