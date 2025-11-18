@@ -96,7 +96,7 @@ export const home_get = (req, res) => {
   res.json({ message: "Welcome to the home page!", userId: req.userId });
 };
 
-// Get current user controller
+// Get current user info
 export const me_get = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password -__v");

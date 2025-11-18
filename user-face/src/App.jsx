@@ -5,6 +5,7 @@ import SignUp from "./SignUp";
 import MainPage from "./MainPage";
 import NavBar from "./NavBar";
 import HomePage from "./HomePage";
+import ProtectedRoute from "./ProtectedRoute";
 
 import "./App.css";
 
