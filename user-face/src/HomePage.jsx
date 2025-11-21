@@ -1,46 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useAuth } from "./AuthContext.jsx";
 import "./HomePage.css";
 
 export default function HomePage() {
-  const [authorised, setAuthorised] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/api/auth/home", {
-          method: "GET",
-          credentials: "include", // Include cookies for authentication
-        });
-
-        if (response.ok) {
-          setAuthorised(true); // User is authenticated
-        } else {
-          setAuthorised(false); // User is not authenticated
-          navigate("/login"); // Redirect to login page
-        }
-      } catch (error) {
-        console.error("Error checking authentication:", error);
-        setAuthorised(false); // On error, treat as not authenticated
-        navigate("/login"); // Redirect to login page
-      } finally {
-        setLoading(false); // Stop loading state
-      }
-    };
-
-    checkAuth();
-  }, [navigate]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!authorised) {
-    return null; // or a redirect component
-  }
-
   return (
     <div className="home-page">
       <div className="profile-card">
