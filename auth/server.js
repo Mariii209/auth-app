@@ -14,6 +14,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+
 // 🧩 Fix for __dirname in ES Modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,12 +35,8 @@ app.use(cookieParser());
 // MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() =>
-    app.listen(PORT || 8000, () => {
-      console.log(`Server is running on port ${PORT}`);
-    })
-  )
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .then(() => console.log("Mongo connected"))
+  .catch((err) => console.error("Mongo error:", err));
 
 // serve static files
 app.use(express.static(path.join(__dirname, "user-face")));
