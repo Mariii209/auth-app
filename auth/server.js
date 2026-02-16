@@ -23,7 +23,7 @@ const __dirname = path.dirname(__filename);
 // CORS configuration for local + Netlify
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://YOUR-NETLIFY-SITE.netlify.app",
+  "https://relaxed-torrone-2e8b95.netlify.app",
 ];
 
 app.use(
