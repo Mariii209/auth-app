@@ -5,9 +5,11 @@ import "./Navbar.css";
 export default function NavBar() {
   const navigate = useNavigate();
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:8000/api/auth/logout", {
+      await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

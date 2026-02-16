@@ -6,10 +6,12 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/auth/me", {
+        const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
           method: "GET",
           credentials: "include",
         });
