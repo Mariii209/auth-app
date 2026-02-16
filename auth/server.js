@@ -20,15 +20,26 @@ app.listen(PORT, () => console.log(`Server running on ${PORT}`));
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CORS configuration
-const corsOptions = {
-  origin: "http://localhost:5173", // frontend URL
-  optionsSuccessStatus: 200,
-  credentials: true, // allow cookies
-};
+// CORS configuration for local + Netlify
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://YOUR-NETLIFY-SITE.netlify.app",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  }),
+);
 
 // Middleware
-app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
