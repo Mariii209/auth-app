@@ -38,12 +38,9 @@ mongoose
   .then(() => console.log("Mongo connected"))
   .catch((err) => console.error("Mongo error:", err));
 
-// serve static files
-app.use(express.static(path.join(__dirname, "user-face")));
-
-// serve index.html for root route
+// Test route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../user-face/dist/index.html"));
+  res.send("Auth API is running ✅");
 });
 
 // auth routes
