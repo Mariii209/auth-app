@@ -52,13 +52,18 @@ const createToken = (id) => {
 export const login_post = async (req, res) => {
   const { email, password } = req.body;
 
+  const cookieOptions = {
+    httpOnly: true,
+    maxAge: Number(process.env.JWT_EXPIRES_IN) * 1000,
+    sameSite: "none",
+    secure: true,
+    path: "/",
+  };
+
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      maxAge: process.env.JWT_EXPIRES_IN * 1000,
-    });
+    res.cookie("jwt", token, cookieOptions);
     res.status(200).json({ user: user._id, message: "Login successful" });
   } catch (err) {
     const errors = handleErrors(err);
@@ -70,6 +75,14 @@ export const login_post = async (req, res) => {
 export const signup_post = async (req, res) => {
   const { fullName, email, password, confirmPassword } = req.body;
 
+  const cookieOptions = {
+    httpOnly: true,
+    maxAge: Number(process.env.JWT_EXPIRES_IN) * 1000,
+    sameSite: "none",
+    secure: true,
+    path: "/",
+  };
+
   try {
     const user = await User.create({
       fullName,
@@ -78,10 +91,7 @@ export const signup_post = async (req, res) => {
       confirmPassword,
     });
     const token = createToken(user._id);
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      maxAge: process.env.JWT_EXPIRES_IN * 1000,
-    });
+    res.cookie("jwt", token, cookieOptions);
     res
       .status(201)
       .json({ user: user._id, message: "User created successfully" });
@@ -113,8 +123,9 @@ export const me_get = async (req, res) => {
 export const logout_post = (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
+    secure: true,
+    path: "/",
   });
 
   res.status(200).json({ message: "Logout successful" });

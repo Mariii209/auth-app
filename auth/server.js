@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
+app.set("trust proxy", 1); // Trust first proxy for secure cookies
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
