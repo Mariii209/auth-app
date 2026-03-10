@@ -7,12 +7,10 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/home`, {
+        const response = await fetch("/api/auth/home", {
           method: "GET",
           credentials: "include", // Include cookies for authentication
         });
